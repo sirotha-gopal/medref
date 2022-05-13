@@ -1,0 +1,15 @@
+.navbar{
+	box-shadow: 0 2px 4px -2px rgb(175 175 175 / 50%);
+}
+
+.font-style{
+	font-size: 43px;
+	font-family: 'Comfortaa', cursive;
+	
+}
+.red{
+	color: #F28B82;
+}
+.blue{
+	color: #78D9EC;
+}

@@ -1,0 +1,23 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+
+<html>
+
+<head>
+<title>Todo's for ${name}</title>
+<link href="webjars/bootstrap/5.1.2/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="css\main.css" rel="stylesheet">
+
+
+<!-- google fonts  -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
+
+ 
+</head>
+
+<body>

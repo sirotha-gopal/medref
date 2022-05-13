@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/user/layout}">
+
+<head>
+<title>Profile</title>
+
+
+</head>
+
+<body>
+	<div layout:fragment="site-section" class="site-wrap">
+
+
+
+
+		<section style="background-color: #eee;">
+			<div class="container py-3 text-dark">
+				<div class="row justify-content-center mb-2">
+					<h1>User Profile</h1>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card mb-4">
+							<div class="card-body text-center">
+								<img th:if="${user.photo} neq ''" th:src="@{${user.photo}}" alt="avatar"
+									class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+								<img th:if="${user.photo} eq '' " src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png" alt="avatar"
+									class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+								<h5 class="my-3" th:text="${user.firstName} + ' '+ ${user.lastName}">John Smith</h5>
+								<div class="d-flex justify-content-center mb-2">
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-primary" role="button"
+										data-bs-toggle="modal" data-bs-target="#exampleModal">
+										Update Profile Picture</button>
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog  modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Choose Photo</h5>
+													
+												</div>
+												<form action="/upload-image" method="post" enctype="multipart/form-data">
+												<div class="modal-body">
+													
+														<input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg" />
+														<input type="hidden" name="userId" th:value="${user.userId}"/>
+													
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+													<input type="submit" class="btn btn-primary"/>
+														
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!-- Modal Ends Here-->
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-lg-8">
+						<div class="card mb-4">
+							<div class="card">
+								<div class="card-body pt-3">
+									<!-- Bordered Tabs -->
+									<ul class="nav nav-tabs nav-tabs-bordered">
+
+										<li class="nav-item">
+											<button class="nav-link active" data-bs-toggle="tab"
+												data-bs-target="#profile-overview">Overview</button>
+										</li>
+
+										<li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab"
+												data-bs-target="#profile-edit">Edit Profile</button>
+										</li>
+
+										<li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab"
+												data-bs-target="#profile-change-password">Change
+												Password</button>
+										</li>
+
+									</ul>
+									<div class="tab-content pt-2">
+
+										<div class="tab-pane fade show active profile-overview"
+											id="profile-overview">
+											
+											<h5 class="card-title">Profile Details</h5>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4"><span style="font-weight: bold;">First Name</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.firstName}">Kevin</div>
+											</div>
+											 
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label "><span style="font-weight: bold;">Last Name</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.lastName}">Anderson</div>
+											</div>
+											
+											<div class="row" sec:authorize="hasRole('ROLE_DOCTOR')">
+												<div class="col-lg-3 col-md-4 label "><span style="font-weight: bold;">Specialization</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${doctor.doctorSpecialization}">MD</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label "><span style="font-weight: bold;">Age</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.age}">Anderson</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label"><span style="font-weight: bold;">City</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.address.city}">Lueilwitz, Wisoky and
+													Leuschke</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label"><span style="font-weight: bold;">State</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.address.state}">Lueilwitz, Wisoky and
+													Leuschke</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label"><span style="font-weight: bold;">Email</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.email}">example@example.com</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 "><span class="font-weight-bold">Phone Number</span></div>
+												<div class="col-lg-9 col-md-8" th:text="${user.phoneNumber}">+91 9623457533</div>
+											</div>
+
+											
+										</div>
+
+										<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+											<!-- Profile Edit Form -->
+											<form method="post" action="/update-profile">
+												
+												<div class="row mb-3">
+													<label for="first name"
+														class="col-md-4 col-lg-3 col-form-label">First Name</label>
+													<div class="col-md-8 col-lg-9">
+														<input type="hidden" name="userId" th:value="${user.userId}">
+														<input name="firstName" type="text" class="form-control"
+															id="firstName" th:value="${user.firstName}">
+													</div>
+												</div>
+												
+												<div class="row mb-3">
+													<label for="last name"
+														class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="lastName" type="text" class="form-control"
+															id="lastName" th:value="${user.lastName}">
+													</div>
+												</div>
+												
+												<div class="row mb-3" sec:authorize="hasRole('ROLE_DOCTOR')">
+													<label for="last name"
+														class="col-md-4 col-lg-3 col-form-label">Specialization</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="doctorSpecialization" type="text" class="form-control"
+															id="doctorSpecialization" th:value="${doctor.doctorSpecialization}">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="age"
+														class="col-md-4 col-lg-3 col-form-label">Age</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="age" type="text" class="form-control"
+															id="age" th:value="${user.age}">
+													</div>
+												</div>
+												
+												<div class="row mb-3">
+													<label for="city"
+														class="col-md-4 col-lg-3 col-form-label">City</label>
+													<div class="col-md-8 col-lg-9">
+														<input type="text" class="form-control"
+															 th:value="${user.address.city}"
+															 name="city">
+													</div>
+												</div>
+												
+												<div class="row mb-3">
+													<label for="state"
+														class="col-md-4 col-lg-3 col-form-label">State</label>
+													<div class="col-md-8 col-lg-9">
+														<input type="text" class="form-control"
+															th:value="${user.address.state}"
+															name="state">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="email" type="text" class="form-control"
+															id="email" th:value="${user.email}">
+															
+													</div>
+												</div>
+												
+												<div class="row mb-3">
+													<label for="phone number"
+														class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="phoneNumber" type="text" class="form-control"
+															id="phoneNumber" th:value="${user.phoneNumber}">
+													</div>
+												</div> 
+
+											
+
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Save
+														Changes</button>
+												</div>
+											</form>
+											<!-- End Profile Edit Form -->
+
+										</div>
+
+
+										<div class="tab-pane fade pt-3" id="profile-change-password">
+											<!-- Change Password Form -->
+											<form>
+
+												<div class="row mb-3">
+													<label for="currentPassword"
+														class="col-md-4 col-lg-3 col-form-label">Current
+														Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="password" type="password"
+															class="form-control" id="currentPassword">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="newPassword"
+														class="col-md-4 col-lg-3 col-form-label">New
+														Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="newpassword" type="password"
+															class="form-control" id="newPassword">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="renewPassword"
+														class="col-md-4 col-lg-3 col-form-label">Re-enter
+														New Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="renewpassword" type="password"
+															class="form-control" id="renewPassword">
+													</div>
+												</div>
+
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Change
+														Password</button>
+												</div>
+											</form>
+											<!-- End Change Password Form -->
+
+										</div>
+
+									</div>
+									<!-- End Bordered Tabs -->
+
+								</div>
+							</div>
+
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	</div>
+
+
+</body>
+
+</html>

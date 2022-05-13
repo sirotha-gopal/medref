@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+<!--  Navigation Links-->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i"
+	rel="stylesheet">
+<link rel="stylesheet" href="fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+<!-- SignUp Form Links -->
+<!-- Font Icon -->
+<link rel="stylesheet"
+	href="signup-login-css/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet" href="signup-login-css/css/style.css">
+
+<!-- My Css -->
+<style>
+.m-top {
+	margin-top: -10px;
+}
+</style>
+
+</head>
+<body>
+
+	<!-- Navigation Ends  -->
+	<div class="main" style="margin-top: -120px;">
+		<!-- Sign up form -->
+		<section class="signup">
+			<div class="container">
+				<a href="/"><h1>Go to Home</h1></a>
+				<div class="signup-content" style="margin-top: -50px;">
+					<div class="signup-form">
+						<h2 class="form-title">Sign up</h2>
+						<form method="POST" action="/signup" class="register-form"
+							id="register-form" th:object="${user}">
+
+							<div class="form-group">
+								<label for="firstName"><i
+									class="zmdi zmdi-account material-icons-name"></i></label> <input
+									type="text" name="firstName" id="firstName"
+									placeholder="First Name" th:filed="*{firstName}" />
+							</div>
+							<div class="form-group">
+								<label for="lastName"><i
+									class="zmdi zmdi-account material-icons-name"></i></label> <input
+									type="text" name="lastName" id="lastName"
+									placeholder="Last Name" th:filed="*{lastName}" />
+							</div>
+							<div class="form-group">
+								<label for="age"><span class="iconify-inline"
+									data-icon="fa-solid:home"></span><i
+									class="zmdi zmdi-number material-icons-number"></i></label> <input
+									type="number" name="age" id="age" placeholder="Your Age"
+									th:filed="*{age}" />
+							</div>
+							<div class="form-group">
+								<label for="phoneNumber"><i
+									class="zmdi zmdi-phone material-icons-phone"></i></label> <input
+									type="number" name="phoneNumber" id="phoneNumber"
+									placeholder="Phone Number" th:filed="*{phoneNumber}" />
+							</div>
+							<div class="form-group">
+								<label for="city"><i class="zmdi zmdi-address"></i></label> <input
+									type="text" name="city" id="city" placeholder="City"
+									th:filed="${address.city}" />
+							</div>
+							<div class="form-group">
+								<label for="state"><i class="zmdi zmdi-address"></i></label> <input
+									type="text" name="state" id="state" placeholder="state"
+									th:filed="${address.state}" />
+							</div>
+							<div class="form-group">
+								<label for="email"><i
+									class="zmdi zmdi-email material-icons-email"></i></label> <input
+									type="text" name="email" id="email" placeholder="Your Email"
+									th:filed="*{email}" />
+							</div>
+							<div class="form-group">
+								<label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
+									type="password" name="password" id="password"
+									placeholder="Password" th:filed="*{password}" />
+							</div>
+							<div class="form-group">
+								<label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+								<input type="password" name="repeatPassword" id="repeatPassword"
+									placeholder="Repeat your password" th:filed="*{repeatPassword}" />
+							</div>
+
+							<div class="form-group form-button">
+								<input type="submit" name="signup" id="signup"
+									class="form-submit" value="Register" />
+							</div>
+						</form>
+					</div>
+					<div class="signup-image">
+						<figure>
+							<img src="signup-login-css/images/signup-image.jpg"
+								alt="sing up image">
+						</figure>
+						<a href="/login" class="signup-image-link">I am already member</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+
+	</div>
+
+	<!-- JS -->
+	<script src="signup-login-css/vendor/jquery/jquery.min.js"></script>
+	<script src="signup-login-css/js/main.js"></script>
+
+	<!-- SignUp Form Links -->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
+
+	<script src="js/main.js"></script>
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

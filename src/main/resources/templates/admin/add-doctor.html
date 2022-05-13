@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/admin/admin-layout}">
+<head>
+<title>Add Doctor</title>
+
+
+</head>
+<body>
+
+	<li layout:fragment="dashboard-link" class="nav-item"><a
+		class="nav-link " aria-current="page" href="/admin/dashboard"> <span
+			data-feather="home"></span> Dashboard
+	</a></li>
+	<li class="nav-item" layout:fragment="add-doctor-link"><a
+		class="nav-link active" href="/admin/add-doctor"> <span
+			data-feather="user-plus"></span> Add Doctor
+	</a></li>
+
+
+
+	<main layout:fragment="content"
+		class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+		<div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2 text-center">Add Doctor</h1>
+
+		</div>
+
+
+
+		<!-- Add Doctor Sections  -->
+		<section>
+			<div class="container ">
+
+				<!-- Alert Box   -->
+				<div th:if="${param.id !=null}"  class="alert alert-warning alert-dismissible fade show text-center"
+					role="alert">
+					<strong>Doctor Added Successfully!<br>Password::<b th:text="${param.id}"></b></strong>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+				</div>
+				<!-- Alert Box Ends Here  -->
+
+				<div class="row justify-content-center">
+					<div class="col-xl-9">
+						<div class="card bg-dark text-white" style="border-radius: 15px;">
+							<div class="card-body" th:object="${doctor}">
+								<form method="post" enctype="multipart/form-data">
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">First name</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="text" placeholder="First Name"
+												class="form-control form-control-lg" name="firstName"
+												th:field="${user.firstName}" />
+
+										</div>
+									</div>
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Last Name</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="text" placeholder="Last Name"
+												class="form-control form-control-lg" name="lastName"
+												th:field="${user.lastName}" />
+
+										</div>
+									</div>
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Doctor Specialization</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="text" placeholder="Doctor Specialization"
+												class="form-control form-control-lg"
+												name="doctorSpecialization"
+												th:field="*{doctorSpecialization}" />
+
+										</div>
+									</div>
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Doctor City</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="text" placeholder="Doctor City"
+												class="form-control form-control-lg" name="doctorCity"
+												th:field="*{doctorCity}" />
+
+										</div>
+									</div>
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Age</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="number" placeholder="Age"
+												class="form-control form-control-lg" name="age"
+												th:field="${user.age}" />
+
+										</div>
+									</div>
+									<div class="row align-items-center pt-4 pb-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Phone Number</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="text" placeholder="phoneNumber"
+												class="form-control form-control-lg" name="phoneNumber"
+												th:field="${user.phoneNumber}" />
+
+										</div>
+									</div>
+
+									<hr class="mx-n3">
+
+									<div class="row align-items-center py-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Email address</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input type="email" class="form-control form-control-lg" name="email"
+												placeholder="example@example.com" th:field="${user.email}" />
+
+										</div>
+									</div>
+
+									<hr class="mx-n3">
+
+									<div class="row align-items-center py-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Full name</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<textarea class="form-control" rows="3"
+												placeholder="Message sent to the employer"></textarea>
+
+										</div>
+									</div>
+
+									<hr class="mx-n3">
+
+									<div class="row align-items-center py-3">
+										<div class="col-md-3 ps-5">
+
+											<h6 class="mb-0">Upload Image</h6>
+
+										</div>
+										<div class="col-md-9 pe-5">
+
+											<input class="form-control form-control-lg" id="image" name="image"
+												type="file" />
+											<div class="small text-muted mt-2">Upload your
+												CV/Resume or any other relevant file. Max file size 50 MB</div>
+
+										</div>
+									</div>
+
+									<hr class="mx-n3">
+
+									<div class="px-5 py-4">
+										<button type="submit" class="btn btn-primary btn-lg">Add Doctor</button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Add Doctor Sections Ends Here -->
+
+
+
+	</main>
+
+
+
+
+</body>
+</html>

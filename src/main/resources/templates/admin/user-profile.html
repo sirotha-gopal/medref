@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/user/layout}">
+
+<head>
+<title>Profile</title>
+
+
+</head>
+
+<body>
+	<div layout:fragment="site-section" class="site-wrap">
+
+
+
+
+		<section style="background-color: #eee;">
+			<div class="container py-5">
+				<div class="row">
+					<div class="col">
+						<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+							<ol class="breadcrumb mb-0">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item"><a href="#">User</a></li>
+								<li class="breadcrumb-item active" aria-current="page">User
+									Profile</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="card mb-4">
+							<div class="card-body text-center">
+								<img th:src="@{${user.photosImagePath}}" alt="avatar"
+									class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+								<h5 class="my-3" th:text="${user.firstName} + ' '+ ${user.lastName}">John Smith</h5>
+								<p class="text-muted mb-1" th:text="${user.photosImagePath}" >Full
+									Stack Developer</p>
+								<p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+								<div class="d-flex justify-content-center mb-2">
+									<!-- Button trigger modal -->
+									<button type="button" class="btn btn-primary" role="button"
+										data-bs-toggle="modal" data-bs-target="#exampleModal">
+										Upload Profile Picture</button>
+									<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1"
+										aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog  modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal
+														title</h5>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<form action="/upload-image" method="post" enctype="multipart/form-data">
+												<div class="modal-body">
+													
+														<input type="file" class="form-control form-control-lg" id="image" name="image" />
+														<input type="hidden" name="userId" th:value="${user.userId}"/>
+													
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-secondary"
+														data-bs-dismiss="modal">Close</button>
+													<input type="submit" class="btn btn-primary"/>
+														
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!-- Modal Ends Here-->
+								</div>
+							</div>
+						</div>
+						<div class="card mb-4 mb-lg-0">
+							<div class="card-body p-0">
+								<ul class="list-group list-group-flush rounded-3">
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center p-3">
+										<i class="fas fa-globe fa-lg text-warning"></i>
+										<p class="mb-0">https://mdbootstrap.com</p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center p-3">
+										<i class="fab fa-github fa-lg" style="color: #333333;"></i>
+										<p class="mb-0">mdbootstrap</p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center p-3">
+										<i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+										<p class="mb-0">@mdbootstrap</p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center p-3">
+										<i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+										<p class="mb-0">mdbootstrap</p>
+									</li>
+									<li
+										class="list-group-item d-flex justify-content-between align-items-center p-3">
+										<i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+										<p class="mb-0">mdbootstrap</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="card mb-4">
+							<div class="card">
+								<div class="card-body pt-3">
+									<!-- Bordered Tabs -->
+									<ul class="nav nav-tabs nav-tabs-bordered">
+
+										<li class="nav-item">
+											<button class="nav-link active" data-bs-toggle="tab"
+												data-bs-target="#profile-overview">Overview</button>
+										</li>
+
+										<li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab"
+												data-bs-target="#profile-edit">Edit Profile</button>
+										</li>
+
+										<li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab"
+												data-bs-target="#profile-settings">Settings</button>
+										</li>
+
+										<li class="nav-item">
+											<button class="nav-link" data-bs-toggle="tab"
+												data-bs-target="#profile-change-password">Change
+												Password</button>
+										</li>
+
+									</ul>
+									<div class="tab-content pt-2">
+
+										<div class="tab-pane fade show active profile-overview"
+											id="profile-overview">
+											<h5 class="card-title">About</h5>
+											<p class="small fst-italic">Sunt est soluta temporibus
+												accusantium neque nam maiores cumque temporibus. Tempora
+												libero non est unde veniam est qui dolor. Ut sunt iure rerum
+												quae quisquam autem eveniet perspiciatis odit. Fuga sequi
+												sed ea saepe at unde.</p>
+
+											<h5 class="card-title">Profile Details</h5>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label ">First Name</div>
+												<div class="col-lg-9 col-md-8" th:text="${user.firstName}">Kevin</div>
+											</div>
+											 
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label ">Last Name</div>
+												<div class="col-lg-9 col-md-8" th:text="${user.lastName}">Anderson</div>
+											</div>
+											
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label ">Age</div>
+												<div class="col-lg-9 col-md-8" th:text="${user.age}">Anderson</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label">Address</div>
+												<div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and
+													Leuschke</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label">Email</div>
+												<div class="col-lg-9 col-md-8" th:text="${user.email}">example@example.com</div>
+											</div>
+
+											<div class="row">
+												<div class="col-lg-3 col-md-4 label">Phone Number</div>
+												<div class="col-lg-9 col-md-8" th:text="${user.phoneNumber}">+91 9623457533</div>
+											</div>
+
+											
+										</div>
+
+										<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+											<!-- Profile Edit Form -->
+											<form method="post" action="/update-profile">
+												
+												<div class="row mb-3">
+													<label for="first name"
+														class="col-md-4 col-lg-3 col-form-label">First Name</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="firstName" type="text" class="form-control"
+															id="firstName" th:value="${user.firstName}">
+													</div>
+												</div>
+												
+												<div class="row mb-3">
+													<label for="last name"
+														class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="lastName" type="text" class="form-control"
+															id="lastName" th:value="${user.lastName}">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+													<div class="col-md-8 col-lg-9">
+														<textarea name="about" class="form-control" id="about"
+															style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="age"
+														class="col-md-4 col-lg-3 col-form-label">Age</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="age" type="text" class="form-control"
+															id="age" th:value="${user.age}">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="email" type="text" class="form-control"
+															id="email" th:value="${user.email}">
+															
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="phone number"
+														class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="phoneNumber" type="text" class="form-control"
+															id="phoneNumber" th:value="${user.phoneNumber}">
+													</div>
+												</div>
+
+											
+
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Save
+														Changes</button>
+												</div>
+											</form>
+											<!-- End Profile Edit Form -->
+
+										</div>
+
+										<div class="tab-pane fade pt-3" id="profile-settings">
+
+											<!-- Settings Form -->
+											<form>
+
+												<div class="row mb-3">
+													<label for="fullName"
+														class="col-md-4 col-lg-3 col-form-label">Email
+														Notifications</label>
+													<div class="col-md-8 col-lg-9">
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox"
+																id="changesMade" checked> <label
+																class="form-check-label" for="changesMade">
+																Changes made to your account </label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox"
+																id="newProducts" checked> <label
+																class="form-check-label" for="newProducts">
+																Information on new products and services </label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox"
+																id="proOffers"> <label class="form-check-label"
+																for="proOffers"> Marketing and promo offers </label>
+														</div>
+														<div class="form-check">
+															<input class="form-check-input" type="checkbox"
+																id="securityNotify" checked disabled> <label
+																class="form-check-label" for="securityNotify">
+																Security alerts </label>
+														</div>
+													</div>
+												</div>
+
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Save
+														Changes</button>
+												</div>
+											</form>
+											<!-- End settings Form -->
+
+										</div>
+
+										<div class="tab-pane fade pt-3" id="profile-change-password">
+											<!-- Change Password Form -->
+											<form>
+
+												<div class="row mb-3">
+													<label for="currentPassword"
+														class="col-md-4 col-lg-3 col-form-label">Current
+														Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="password" type="password"
+															class="form-control" id="currentPassword">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="newPassword"
+														class="col-md-4 col-lg-3 col-form-label">New
+														Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="newpassword" type="password"
+															class="form-control" id="newPassword">
+													</div>
+												</div>
+
+												<div class="row mb-3">
+													<label for="renewPassword"
+														class="col-md-4 col-lg-3 col-form-label">Re-enter
+														New Password</label>
+													<div class="col-md-8 col-lg-9">
+														<input name="renewpassword" type="password"
+															class="form-control" id="renewPassword">
+													</div>
+												</div>
+
+												<div class="text-center">
+													<button type="submit" class="btn btn-primary">Change
+														Password</button>
+												</div>
+											</form>
+											<!-- End Change Password Form -->
+
+										</div>
+
+									</div>
+									<!-- End Bordered Tabs -->
+
+								</div>
+							</div>
+
+
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card mb-4 mb-md-0">
+									<div class="card-body">
+										<p class="mb-4">
+											<span class="text-primary font-italic me-1">assigment</span>
+											Project Status
+										</p>
+										<p class="mb-1" style="font-size: .77rem;">Web Design</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Website
+											Markup</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 72%" aria-valuenow="72" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 89%" aria-valuenow="89" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Mobile
+											Template</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 55%" aria-valuenow="55" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Backend
+											API</p>
+										<div class="progress rounded mb-2" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 66%" aria-valuenow="66" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card mb-4 mb-md-0">
+									<div class="card-body">
+										<p class="mb-4">
+											<span class="text-primary font-italic me-1">assigment</span>
+											Project Status
+										</p>
+										<p class="mb-1" style="font-size: .77rem;">Web Design</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Website
+											Markup</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 72%" aria-valuenow="72" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 89%" aria-valuenow="89" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Mobile
+											Template</p>
+										<div class="progress rounded" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 55%" aria-valuenow="55" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+										<p class="mt-4 mb-1" style="font-size: .77rem;">Backend
+											API</p>
+										<div class="progress rounded mb-2" style="height: 5px;">
+											<div class="progress-bar" role="progressbar"
+												style="width: 66%" aria-valuenow="66" aria-valuemin="0"
+												aria-valuemax="100"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	</div>
+
+
+</body>
+
+</html>

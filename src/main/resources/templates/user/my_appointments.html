@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/user/layout}">
+
+<head>
+<title>Pharma &mdash; Colorlib Template</title>
+								
+
+</head>
+
+<body>
+	
+<li layout:fragment="current-appointment-link" class="active"><a th:href="@{/my-appointments}">My Appointments</a></li>
+		
+	<div layout:fragment="site-section" class="site-wrap">
+		
+		<div class="container">
+			<h1 sec:authorize="hasRole('ROLE_USER')" style="font-size: 4vw;"
+				th:text="|${user.firstName} ${user.lastName}|"></h1>
+			<h1 sec:authorize="hasRole('ROLE_DOCTOR')" style="font-size: 4vw;"
+				th:text="|Dr. ${user.firstName} ${user.lastName}|"></h1>
+		</div>
+
+		<div class="container mt-5">
+			<div class="float-right">
+				<a class="btn btn-danger"
+					th:href="@{/doctor/closed/{id}(id=${doctorId})}" role="button"
+					sec:authorize="hasRole('ROLE_DOCTOR')">Previous Appointments</a> <a
+					class="btn btn-danger"
+					th:href="@{/closed/{id}(id=${#authentication.getPrincipal().getUsername()})}"
+					role="button" sec:authorize="hasRole('ROLE_USER')">Previous
+					Appointments</a>
+			</div>
+			<div class="table-responsive-md">
+				<table class="table" id="example">
+					<thead>
+						<tr>
+							<th scope="col">Appointment Id</th>
+							<th scope="col">First Name</th>
+							<th scope="col">Last Name</th>
+							<th scope="col">Appointment Date</th>
+							<th scope="col">Phone Number</th>
+							<th scope="col" sec:authorize="hasRole('ROLE_DOCTOR')">Close</th>
+							<th scope="col" sec:authorize="hasRole('ROLE_USER')">Doctor
+								ID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="appointment : ${appointments}"
+							th:if="${appointment.isActive}">
+							<th scope="row" th:text="${appointment.appointmentId}">1</th>
+							<td th:text="${appointment.patientFirstName}">FirstName</td>
+							<td th:text="${appointment.patientLastName}">LastName</td>
+							<td th:text="${appointment.appointmentDate}">LastName</td>
+							<td th:text="${appointment.phoneNumber}">LastName</td>
+							<td sec:authorize="hasRole('ROLE_DOCTOR')"><a
+								class="btn btn-danger"
+								th:href="@{/doctor/close/{id}(id = ${appointment.appointmentId})}"
+								role="button">Close Appointment</a></td>
+							<td sec:authorize="hasRole('ROLE_USER')"
+								th:text="${appointment.doctorId}">Doctor ID</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+
+
+	</div>
+
+
+
+</body>
+
+</html>

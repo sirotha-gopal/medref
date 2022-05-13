@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<title>Pharma &mdash; Colorlib Template</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<!-- CSS For DATA Table  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+<!-- CSS For DATA Table ENDS -->
+
+
+
+<link
+	href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i"
+	rel="stylesheet">
+<link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/magnific-popup.css">
+<link rel="stylesheet" href="/css/jquery-ui.css">
+<link rel="stylesheet" href="/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+
+<link rel="stylesheet" href="/css/aos.css">
+
+<link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+.my {
+	margin-top: -129px;
+}
+</style>
+
+</head>
+
+<body>
+	<div class="site-wrap">
+
+
+		<div class="site-navbar py-2">
+
+
+
+			<div class="container">
+				<div class="d-flex align-items-center justify-content-between">
+					<div class="logo">
+						<div class="site-logo">
+							<a href="/" class="js-logo-clone">medRef</a>
+						</div>
+					</div>
+					<div class="main-nav d-none d-lg-block">
+						<nav class="site-navigation text-right text-md-center"
+							role="navigation">
+							<ul class="site-menu js-clone-nav d-none d-lg-block">
+								<li sec:authorize="hasRole('ROLE_USER')"
+									layout:fragment="home-link"><a href="/">Home</a></li>
+								<li sec:authorize="isAnonymous()" layout:fragment="home-link"><a
+									href="/">Home</a></li>
+								<li sec:authorize="hasRole('ROLE_USER')"
+									layout:fragment="book-appointment-link"><a
+									href="/appointment/get-appointment">Book Appointment</a></li>
+								<li sec:authorize="isAnonymous()"
+									layout:fragment="book-appointment-link"><a
+									href="/appointment/get-appointment">Book Appointment</a></li>
+								<li sec:authorize="hasRole('ROLE_USER')"
+									layout:fragment="current-appointment-link"><a
+									th:href="@{/my-appointments}">My Appointments</a></li>
+								<li sec:authorize="isAnonymous()"
+									layout:fragment="current-appointment-link"><a
+									th:href="@{/my-appointments}">My Appointments</a></li>
+								<li sec:authorize="hasRole('ROLE_DOCTOR')"
+									layout:fragment="today-appointment-link"><a
+									th:href="@{/doctor/{id}(id=${#authentication.getPrincipal().getUsername()})}">Today's
+										Appointments</a></li>
+								<li layout:fragment="contact-link"><a href="/contact">Contact</a></li>
+								<li><a class="btn btn-primary" th:href="@{/signup}"
+									href="/signup" role="button" sec:authorize="!isAuthenticated()">SignUp</a></li>
+								<li><a class="btn btn-primary" th:href="@{/login}"
+									href="/login" role="button" sec:authorize="!isAuthenticated()">Login</a></li>
+								<li><a class="btn btn-danger" th:href="@{/logout}"
+									href="/logout" role="button" sec:authorize="isAuthenticated()">Logout</a></li>
+
+
+							</ul>
+
+						</nav>
+					</div>
+
+					<div class="icons d-flex">
+						<span class="mt-2" sec:authorize="isAuthenticated()"
+							th:text="'Hi, '+${user.firstName}"> Name</span>&nbsp; <a
+							href="/user-profile" sec:authorize="isAuthenticated()"> <span
+							th:if="${user.photo} neq ''"><img
+								th:src="@{${user.photo}}" alt="avatar"
+								class="rounded-circle img-fluid"
+								style="width: 50px; height: 50px;"></span> <span
+							th:if="${user.photo} eq ''"><img
+								src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png"
+								alt="avatar" class="rounded-circle img-fluid"
+								style="width: 50px; height: 50px;"></span>
+						</a> <a href="#"
+							class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
+							class="icon-menu"></span></a>
+					</div>
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+		<div layout:fragment="site-section"></div>
+
+
+
+
+
+		<footer class="site-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+
+						<div class="block-7">
+							<h3 class="footer-heading mb-4">About Us</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Eius quae reiciendis distinctio voluptates sed dolorum excepturi
+								iure eaque, aut unde.</p>
+						</div>
+
+					</div>
+					<div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+						<!-- <h3 class="footer-heading mb-4">Quick Links</h3>
+						 -->
+						<ul class="list-unstyled">
+							<!-- <li><a href="#">Supplements</a></li>
+							<li><a href="#">Vitamins</a></li>
+							<li><a href="#">Diet &amp; Nutrition</a></li>
+							<li><a href="#">Tea &amp; Coffee</a></li> -->
+						</ul>
+					</div>
+
+					<div class="col-md-6 col-lg-3">
+						<div class="block-5 mb-5">
+							<h3 class="footer-heading mb-4">Contact Info</h3>
+							<ul class="list-unstyled">
+								<li class="address">1 Bhoj marg Tambaku Bazar, Freeganj,
+									Ujjain, Madhya Pradesh 456010</li>
+								<li class="phone"><a href="tel://9977694283">+91
+										9977694283</a></li>
+								<li class="email">sirothagopal14@gmail.com</li>
+							</ul>
+						</div>
+
+
+					</div>
+				</div>
+				<div class="row pt-5 mt-5 text-center">
+					<div class="col-md-12">
+						<p>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
+							All rights reserved | This template is made with <i
+								class="icon-heart" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="/webjars/jqurey/3.1.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/5.1.2/js/bootstrap.bundle.min.js"></script>
+
+
+
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/owl.carousel.min.js"></script>
+	<script src="/js/jquery.magnific-popup.min.js"></script>
+	<script src="/js/aos.js"></script>
+
+	<script src="/js/main.js"></script>
+
+
+
+	<!-- Script For Data Tables -->
+
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
+	</script>
+
+</body>
+
+</html>
